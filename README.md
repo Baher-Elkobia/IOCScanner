@@ -34,3 +34,18 @@ HTML report will be automatically generated inside the report folder including d
 <img src="https://github.com/Eslam-Elkobia/IOCScanner/blob/master/images/Report%20Dashboard.png">
 <p></p>
 <img src="https://github.com/Eslam-Elkobia/IOCScanner/blob/master/images/Report%20details.png">
+
+ <h2> [License] </h2>
+   Copyright 2017, Eslam Elkobia, CyberInsight360.com 
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
