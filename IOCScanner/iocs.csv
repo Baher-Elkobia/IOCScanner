@@ -1,0 +1,2 @@
+file,folder,process,service,RegistryPath,Key,Value,connection,port,user,group
+C:\text.txt,c:\XvpUGH,VGAuthService,BDESVC,HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\run,hack,c:\test\text.exe,111.221.29.171,35432,Xuser,Xgroup
