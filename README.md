@@ -30,3 +30,4 @@
 <h2> [Report] </h2>
 HTML report will be automatically generated inside the report folder including details about IOCs found for each remote host, in addition to a nice statistics dashboard
 
+<img src="/Eslam-Elkobia/IOCScanner/blob/master/images/Report%20Dashboard.png" alt="reporting" style="max-width:100%;">
