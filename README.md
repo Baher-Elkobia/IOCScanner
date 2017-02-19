@@ -18,6 +18,7 @@
 <p>   B- Using PowerShell script as a start-up script,however, you need to wait untill all hosts get the next update</p>
 <p>4. Run IOCScanner</p>
 <p>PS .\IOCScanner.ps1 -targets servers.txt -IOCList iocs.csv -UserName DomainName\UserName -Password password123 -Block </p>
+<p>PS Get-help .\IOCScanner.ps1 -examples </p>
 
  <h2> [Parameters] </h2>
  <pre>
@@ -30,4 +31,6 @@
 <h2> [Report] </h2>
 HTML report will be automatically generated inside the report folder including details about IOCs found for each remote host, in addition to a nice statistics dashboard
 
-<img src="/Eslam-Elkobia/IOCScanner/blob/master/images/Report%20Dashboard.png" alt="reporting" style="max-width:100%;">
+<img src="https://github.com/Eslam-Elkobia/IOCScanner/blob/master/images/Report%20Dashboard.png">
+<p></p>
+<img src="https://github.com/Eslam-Elkobia/IOCScanner/blob/master/images/Report%20details.png">
