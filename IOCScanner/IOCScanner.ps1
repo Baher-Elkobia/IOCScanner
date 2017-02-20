@@ -63,7 +63,7 @@ Param(
 )
 
 ########################################## Initialization ################################################
-
+cls
 function Write-Ascii {
 # Wrapping the script in a function to make it a module
 
@@ -386,9 +386,24 @@ process {
 } # end of process block
     
 }
-
-Write-Ascii 'IOC Scanner'; Write-Host ""
+$banner = @"
+#==========================================================#
+# Indication Of Compromise Scanner                         #
+# ================================                         #
+# Author: Eslam Baher Elkobia, CyberSecurity Consultant    #
+# www.CyberInsight360.com                                  #
+# eng . baher @ hotmail . com                              #
+# v0.1  --  Feb, 2017                                      #
+#==========================================================#
+"@
 $date =  Get-Date -format "dd-MMM-yyyy-HH-mm"
+$StartDate = get-date
+
+Write-Ascii 'IOC Scanner' ; Write-Host "" 
+Write-Host $banner -ForegroundColor Yellow; Write-Host "" 
+Write-host "[+]Scanning starts at $StartDate" -ForegroundColor Gray 
+Write-Host "" 
+
 $Summary = @{}
 $Clone = @{Compromised = "False";Blocked = "False";MachineName ="";WinVersion = "";FileIOCs="False";FolderIOCs="False";ProcessIOCs="False";ServiceIOCs="False";RegistryIOCs="False";ConnectionIOCS="False";PortIOCs="False";UserIOCs="False";GroupIOCs="False"}
 if ($Password -and $UserName)
@@ -501,14 +516,15 @@ $summary[$job.location]['MachineName'] = Invoke-Command -ScriptBlock {$env:compu
 
 # check/print the result of each job/host
 $compromisedHosts = @()
+
 $Jobs.ChildJobs | Foreach-Object { 
 $ChildJob = $_
 $counter =0 ; $Recpt = 0
 $Recpt = Receive-Job $ChildJob -Keep
 
-Write-Host "================================================================================" -ForegroundColor Yellow
-Write-Host "                         IOCs details for" $ChildJob.location -ForegroundColor Yellow
-Write-Host "================================================================================" -ForegroundColor Yellow
+Write-Host "================================================================================" -ForegroundColor Yellow 
+Write-Host "                         IOCs details for" $ChildJob.location -ForegroundColor Yellow 
+Write-Host "================================================================================" -ForegroundColor Yellow  
 $Recpt
     $i = 0
     $FileIocOut, $FolderIocOut, $GroupIocOut,$UserIocOut,$ProcessIocOut, $ServiceIocOut,$ConnectionIocOut,$RegIocOut,$PortIocOut = $null
@@ -840,11 +856,10 @@ foreach ($Target in $Summary.GetEnumerator())
      $compromisedHostsCount = $compromisedHosts.count
      $CleanHostsCount = $Hosts.count - $compromisedHosts.count
 
-     $Outfile = $(".\report\IOC_Scan_Result_" + $date + ".html")
+     $OutfileHTML = $(".\report\IOC_Scan_Result_" + $date + ".html")
      $htmlHead = @" 
  <!DOCTYPE html>
 <html lang="en">
-
   <head>
     
     <!-- Meta Tag -->
@@ -858,8 +873,7 @@ foreach ($Target in $Summary.GetEnumerator())
     <meta name="url" content="http://www.CyberInsight.com">
     <meta name="copyright" content="CyberInsight.com">
     <meta name="robots" content="index,follow">
-    
-    
+        
     <title>IOC Scanner</title>
     
     <!-- Favicon -->
@@ -978,8 +992,8 @@ foreach ($Target in $Summary.GetEnumerator())
     </section>
     <!-- statistics end -->
 "@
-     $htmlHead | Out-File -Encoding utf8 -FilePath $Outfile
-     $AgreegIocHtml | Out-File -Append -Encoding utf8 -FilePath $Outfile
+     $htmlHead | Out-File -Encoding utf8 -FilePath $OutfileHTML
+     $AgreegIocHtml | Out-File -Append -Encoding utf8 -FilePath $OutfileHTML
      $HTMLFooter = @"
     <!-- Footer Start -->
     <footer class="footer-section">
@@ -1017,4 +1031,9 @@ foreach ($Target in $Summary.GetEnumerator())
   </body>
  </html>
 "@
-     $HTMLFooter| Out-File -Append -Encoding utf8 -FilePath $Outfile
+     $HTMLFooter| Out-File -Append -Encoding utf8 -FilePath $OutfileHTML
+
+     $EndDate = get-date
+     Write-host "[+]Scanning ends at $EndDate" -ForegroundColor Gray
+     $ScanningDuration = $EndDate - $StartDate
+     Write-Host "[+]Scanning duration is" $ScanningDuration.Days "days -" $ScanningDuration.Hours "hours -" $ScanningDuration.Minutes "minutes -" $ScanningDuration.Seconds "seconds"
