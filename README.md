@@ -2,7 +2,7 @@
  <pre>
     IOCScanner
     PowerShell Incident Response Framework 
-    Eslam Elkobia | eng.baher@hotmail.com
+    Eslam Elkobia
     v0.1 - Janurary 2017</pre>
  
  <h2> [About IOCScanner] </h2>
